@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, target-densitydpi=medium-dpi" />
+    <!-- <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" /> -->
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/app.css" />
+    <!-- JQuery Mobile CSS -->
+    <link rel="stylesheet" type="text/css" href="lib/jquery.mobile/themes/jquery.mobile.ipva.theme.min.css" />
+    <link rel="stylesheet" type="text/css" href="lib/jquery.mobile/themes/jquery.mobile.icons.min.css" />
+    <!--<link rel="stylesheet" type="text/css" href="lib/jquery.mobile/css/jquery.mobile-1.4.4.min.css" />-->
+    <link rel="stylesheet" type="text/css" href="lib/jquery.mobile/css/jquery.mobile.structure-1.4.4.min.css" />
+    <!-- Font Awesome -->
+    <!–[if IEMobile]>
+    <!-- <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" /> -->
+        <link rel="stylesheet" type="text/css" href="lib/fontawesome/css/font-awesome-wp.min.css" />
+    <![endif]—>
+    <![if !IEMobile]>
+        <link rel="stylesheet" type="text/css" href="lib/fontawesome/css/font-awesome.min.css" />
+    <![endif]>
+
+    <title>IPVA Mobile</title>
+</head>
+<body ng-controller="AppCtrl">
+
+<!-- PAGINA SPLASH -->
+<div data-theme="f" data-role="page" data-title="IPVA Mobile" id="splash">
+    <div data-theme="f" data-role="content" class="center middle splash">
+        <div class="div-table">
+            <div class="div-row">
+                <div class="div-cell">
+                    <img src="img/logo-sef.png" />
+                    <img src="img/logo-detran.png" />
+                    <div class="progress-wrapper">
+                        <div class="progress" id="progress"></div>
+                    </div>
+                    <h3 class="title">IPVA - MG</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA CONSULTAR VEICULO -->
+<div data-theme="f" ng-controller="ConsultarVeiculoCtrl" data-role="page" data-title="Consultar Veículo" id="consultar_veiculo">
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left"></div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right"></div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content">
+        <form name="frmConsultarVeiculo" novalidate>
+            <label>
+                Informe o RENAVAM para consultar a situação do veículo.
+            </label>
+            <label for="txtRenavamConsulta">RENAVAM</label>
+            <input type="tel" maxlength="11" pattern="[0-9]*" ng-model="veiculo.renavam" name="txtRenavamConsulta" id="txtRenavamConsulta" placeholder="ex.: 01010101010" value="">
+
+            <div class="button-wrap">
+                <a ng-click="consultarVeiculo(veiculo)" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-g">
+                    <i class="fa fa-search"></i>
+                    <span>Consultar</span>
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#cadastrar_veiculo'});"> -->
+                    <a href="#cadastrar_veiculo">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#veiculo_cadastrado'});"> -->
+                    <a href="#veiculo_cadastrado">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#escala_vencimento'});"> -->
+                    <a href="#escala_vencimento">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA CADASTRAR VEICULO -->
+<div data-theme="f" ng-controller="CadastrarVeiculoCtrl" data-role="page" data-title="Cadastrar Veículo" id="cadastrar_veiculo">
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left"></div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right"></div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content" class="cadastrar-veiculo-content">
+        <form>
+            <label for="txtRenavamCadastro">RENAVAM</label>
+            <input type="tel" maxlength="11" pattern="[0-9]*" type="text" ng-model="veiculo.renavam" ng-disabled="flagAlterar" name="txtRenavamCadastro" id="txtRenavamCadastro" placeholder="ex.: 01010101010">
+
+            <label for="txtNome">Nome</label>
+            <input type="text" maxlength="25" ng-model="veiculo.nome" name="txtNome" id="txtNome" placeholder="ex.: Carro do João">
+
+            <a href="#" onClick="javascript:app.exibirMensagemPadrao({'tipo':'receber_notificacao'})" class="link-receber-notificacao">
+                <i class="fa fa-info-circle icone-receber-notificacao"></i>
+                <label style="display: inline-block;">Receber notificação:</label>
+            </a>
+            <div style="display: block;">
+                <!--<select ng-model="veiculo.notificacao" ng-options="notificacao for notificacao in opcoesNotificacao" name="chkNotificacao" id="chkNotificacao" data-role="slider" data-theme="g"></select>-->
+                <select ng-model="veiculo.notificacao" name="chkNotificacao" id="chkNotificacao" data-role="flipswitch" data-theme="g">
+                    <option value="Não" selected>Não</option>
+                    <option value="Sim">Sim</option>
+                </select>
+            </div>
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <div class="button-wrap">
+                        <a onclick="app.resetForm(true)" ng-click="limpar(true)" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-g">
+                            <i class="fa fa-trash-o"></i>
+                            <span>Limpar</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="button-wrap">
+                        <a ng-click="cadastrarVeiculo(veiculo)" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-g">
+                            <i class="fa fa-save"></i>
+                            <span>Salvar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#consultar_veiculo'});"> -->
+                    <a href="#consultar_veiculo">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#veiculo_cadastrado'});"> -->
+                    <a href="#veiculo_cadastrado">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#escala_vencimento'});"> -->
+                    <a href="#escala_vencimento">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA VEICULO CADASTRADO-->
+<div data-theme="f" ng-controller="VeiculoCadastradoCtrl" data-role="page" data-title="Veículo Cadastrado" id="veiculo_cadastrado">
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left"></div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right"></div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content" class="veiculo-cadastrado-content">
+        <div ng-show="veiculos" data-role="collapsibleset" data-theme="f" data-content-theme="f">
+            <div data-role="collapsible" class="ui-group-theme-f collapsible-header" ng-repeat="veiculo in veiculos track by veiculo.renavam" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                <h2 id="{{'col_header_' + veiculo.renavam}}" ng-click="selecionarVeiculo($index, veiculo)">{{veiculo.nome}}</h2>
+                <div class="ui-grid-b ui-group-theme-f">
+                    <div class="ui-block-a">
+                        <div class="button-wrap" ng-click="consultarSituacao($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-search"></i>
+                                <div>Consultar</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="button-wrap" ng-click="alterarVeiculo($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-pencil"></i>
+                                <div>Alterar</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-c">
+                        <div class="button-wrap" ng-click="excluirVeiculo($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-trash-o"></i>
+                                <div>Excluir</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--
+                <div class="ui-grid-solo ui-group-theme-f">
+                    <div class="ui-block-a">
+                        <div class="button-wrap" ng-click="consultarSituacao($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-search"></i>
+                                <div>Consultar</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="button-wrap" ng-click="consultarDadosVeiculo($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-car"></i>
+                                <div>Dados Veículo</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-grid-a ui-group-theme-a">
+                    <div class="ui-block-a">
+                        <div class="button-wrap" ng-click="alterarVeiculo($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-pencil"></i>
+                                <div>Alterar</div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div class="button-wrap" ng-click="excluirVeiculo($index, veiculo)">
+                            <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                <i class="fa fa-trash-o"></i>
+                                <div>Excluir</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                -->
+            </div>
+        </div>
+
+        <div ng-hide="veiculos" class="center">
+            <h3>Aguarde</h3>
+            <h4>Carregando a lista de veículos cadastrada.</h4>
+        </div>
+
+        <div class="center" ng-show="veiculos.length < 1">
+            <h3>Nenhum veículo cadastrado</h3>
+        </div>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#consultar_veiculo'});"> -->
+                    <a href="#consultar_veiculo">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#cadastrar_veiculo'});"> -->
+                    <a href="#cadastrar_veiculo">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#escala_vencimento'});"> -->
+                    <a href="#escala_vencimento">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA ESCALA VENCIMENTO -->
+<div data-theme="f" ng-controller="EscalaVencimentosCtrl" data-role="page" data-title="Escala Vencimento" id="escala_vencimento">
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left"></div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right"></div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content" class="escala-vencimento-content">
+        <div ng-show="escala" class="ui-corner-all custom-corners">
+            <div class="ui-bar ui-bar-b page-subtitle">
+                <h3>{{escala.anoExercicio}}</h3>
+            </div>
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="escala-vencimento" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive">
+                    <thead>
+                    <tr class="ui-bar-a">
+                        <th>Finais da Placa</th>
+                        <th>Cota única / 1ª Parcela (Janeiro)</th>
+                        <th>2ª Parcela (Fevereiro)</th>
+                        <th>3ª Parcela (Março)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="placa in escala.placas track by placa.finalPlaca">
+                        <th>{{placa.finalPlaca}}</th>
+                        <th>{{placa.jan}}</th>
+                        <th>{{placa.fev}}</th>
+                        <th>{{placa.mar}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div ng-hide="escala" class="center">
+            <h3>Aguarde</h3>
+            <h4>Carregando escala de vencimento mais atualizada</h4>
+        </div>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#consultar_veiculo'});"> -->
+                    <a href="#consultar_veiculo">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#cadastrar_veiculo'});"> -->
+                    <a href="#cadastrar_veiculo">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <!-- <a href="javascript:app.changePage({'pageId':'#veiculo_cadastrado'})"> -->
+                    <a href="#veiculo_cadastrado">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <a class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA SITUACAO VEICULO -->
+<div data-theme="f" ng-controller="SituacaoVeiculoCtrl" data-role="page" data-title="Situação do Veículo" id="situacao_veiculo" class="situacao-veiculo-page">
+    <div data-role="panel" data-display="overlay" id="menuIpvaTrlav" data-theme="g" class="menu">
+        <div class="center menu-title ui-panel-inner">IPVA / TRLAV</div>
+        <div ng-repeat="pagamento in veiculo.pagamentos track by pagamento.exercicio | orderBy : 'exercicio' : true" >
+            <a href="#" ng-click="selecionarPagamento(pagamento);" class="ui-btn" ng-class="{'ui-state-disabled' : desativarPagamento(pagamento)}">
+                <div>{{pagamento.exercicio}}</div>
+                <div>{{pagamento.situacao}}</div>
+            </a>
+        </div>
+    </div>
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left">
+                <a href="#" onclick="$('#menuIpvaTrlav').panel('open', false);" class="ui-shadow ui-btn ui-btn-i ui-corner-all ui-mini">
+                    <i class="fa fa-align-justify"></i>
+                    <span>Menu</span>
+                </a>
+            </div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right">
+                <a href="#" data-rel="back" class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                    <i class="fa fa-reply"></i>
+                    <span>Voltar</span>
+                </a>
+            </div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content" class="dados-veiculo-content">
+        <div class="ui-corner-all custom-corners">
+            <div class="ui-bar ui-bar-b page-subtitle center">
+                <h3>Dados do Veículo</h3>
+            </div>
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="tblDadosVeiculo" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive table-2-cols table-first-col-emphasis">
+                    <thead>
+                    <tr class="ui-bar-c">
+                        <th colspan="2">{{veiculo.nome}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Renavam:</th>
+                        <th>{{veiculo.renavam}}</th>
+                    </tr>
+                    <tr>
+                        <th>Placa:</th>
+                        <th>{{veiculo.placa}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Marca/Modelo:</th>
+                        <th>{{veiculo.marca}}</th>
+                    </tr>
+                    <tr>
+                        <th>Ano Fabricação:</th>
+                        <th>{{veiculo.ano}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Município:</th>
+                        <th>{{veiculo.municipio}}</th>
+                    </tr>
+                    <tr>
+                        <th>Seguro Pago:</th>
+                        <th>{{veiculo.seguroPago}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Seguro Anterior Pago:</th>
+                        <th>{{veiculo.seguroAnteriorPago}}</th>
+                    </tr>
+                    <tr>
+                        <th>Data Licenciamento:</th>
+                        <th>{{veiculo.dataLicenciamento}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Situação Licenciamento:</th>
+                        <th>{{veiculo.situacaoLicenciamento}}</th>
+                    </tr>
+                    <tr>
+                        <th>Número AR:</th>
+                        <th>{{veiculo.numeroAR}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Quantidade de Multas:</th>
+                        <th>{{veiculo.qtdeMultas}}</th>
+                    </tr>
+                    <tr>
+                        <th>Quantidade de Notificações:</th>
+                        <th>{{veiculo.qtdeNotificacoes}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Impedimentos:</th>
+                        <th>{{veiculo.impedimentos}}</th>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <div ng-show="veiculo" data-role="collapsibleset" data-theme="j" data-content-theme="f" data-inset="false" class="collapsible-vencimentos">
+                                <div data-role="collapsible" class="ui-group-theme-f collapsible-header" class="center" data-iconpos="right" data-collapsed-icon="carat-d" data-expanded-icon="carat-u">
+                                    <h2>Vencimentos</h2>
+
+                                    <div ng-repeat="pgGroup in pagamentos track by $index" class="ui-grid-a ui-group-theme-f">
+                                        <div ng-repeat="pagamento in pgGroup" ng-class="'ui-block-' + letraDoAlfabeto($index)">
+                                            <div class="button-wrap" ng-click="selecionarPagamento(pagamento)" ng-class="{'ui-state-disabled' : desativarPagamento(pagamento)}">
+                                                <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                                    <div>{{pagamento.exercicio}}</div>
+                                                    <div>{{pagamento.situacao}}</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--<div ng-repeat="pagamento in veiculo.pagamentos | orderBy : 'exercicio' : true" class="ui-grid-b ui-group-theme-f">
+                                        <div class="ui-block-a">
+                                            <div class="button-wrap" ng-click="consultarSituacao($index, veiculo)">
+                                                <a class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                                                    <div>{{pagamento.exercicio}}</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#consultar_veiculo" class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cadastrar_veiculo">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#veiculo_cadastrado">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#escala_vencimento">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+<!-- PAGINA SITUACAO VENCIMENTOS VEICULO -->
+<div data-theme="f" ng-controller="SituacaoVeiculoCtrl" data-role="page" data-title="Situação Vencimentos do Veículo" id="situacao_vencimentos_veiculo" class="situacao-veiculo-page">
+    <div data-role="panel" data-display="overlay" id="menuIpvaTrlavPagamento" data-theme="g" class="menu">
+        <div class="center menu-title ui-panel-inner">IPVA / TRLAV</div>
+        <div ng-repeat="pagamento in veiculo.pagamentos | orderBy : 'exercicio' : true" >
+            <a href="#" ng-click="selecionarPagamento(pagamento);" class="ui-btn" ng-class="{'ui-state-disabled' : desativarPagamento(pagamento)}">
+                <div>{{pagamento.exercicio}}</div>
+                <div>{{pagamento.situacao}}</div>
+            </a>
+        </div>
+    </div>
+    <div data-theme="f" data-role="header" data-tap-toggle="false" data-position="fixed" data-id="header" class="app-header">
+        <div class="app-header-row">
+            <div class="app-header-cell-left">
+                <a href="#" onclick="$('#menuIpvaTrlavPagamento').panel('open', false);" class="ui-shadow ui-btn ui-btn-i ui-corner-all ui-mini">
+                    <i class="fa fa-align-justify"></i>
+                    <span>Menu</span>
+                </a>
+            </div>
+            <div class="app-header-cell-middle">
+                <a class="ui-btn ui-btn-h ui-corner-all ui-mini">
+                    <h3><i class="fa fa-play fa-ipva"></i><span class="app-title">IPVA</span></h3>
+                </a>
+            </div>
+            <div class="app-header-cell-right">
+                <a href="#" data-rel="back" class="ui-shadow ui-btn ui-btn-g ui-corner-all ui-mini">
+                    <i class="fa fa-reply"></i>
+                    <span>Voltar</span>
+                </a>
+            </div>
+        </div>
+    </div><!-- /header -->
+
+    <div data-theme="f" data-role="content" class="dados-veiculo-content">
+        <div class="ui-corner-all custom-corners">
+            <div class="ui-bar ui-bar-b page-subtitle center">
+                <h3>Vencimentos</h3>
+            </div>
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="tblDadosVencimentosVeiculo" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive table-2-cols table-first-col-emphasis">
+                    <thead>
+                    <tr class="ui-bar-c">
+                        <th colspan="2">{{veiculo.nome}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Renavam:</th>
+                        <th>{{veiculo.renavam}}</th>
+                    </tr>
+                    <tr>
+                        <th>Placa:</th>
+                        <th>{{veiculo.placa}}</th>
+                    </tr>
+
+                    <tr>
+                        <th>Marca/Modelo:</th>
+                        <th>{{veiculo.marca}}</th>
+                    </tr>
+                    <tr>
+                        <th>Ano:</th>
+                        <th>{{veiculo.ano}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br/>
+
+        <div class="ui-bar ui-bar-c page-subtitle center">
+            <h3>{{pagamentoSelecionado.exercicio}}</h3>
+        </div>
+
+        <br/>
+
+        <div class="ui-corner-all custom-corners">
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="tblLicenciamentoVeiculo" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive table-2-cols table-first-col-emphasis">
+                    <thead>
+                    <tr>
+                        <th class="title center ui-bar-b" colspan="2">Taxa de Licenciamento:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Vencimento:</th>
+                        <th>{{pagamentoSelecionado.dataVencimentoTaxaLic}}</th>
+                    </tr>
+                    <tr>
+                        <th>Valor:</th>
+                        <th>{{pagamentoSelecionado.taxaLic}} {{(pagamentoSelecionado.situacaoTaxaLic.toLowerCase() != 'quitado') ? '*' : ''}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br ng-show="exibeTabelaCotaUnica(pagamentoSelecionado)"/>
+        <div ng-show="exibeTabelaCotaUnica(pagamentoSelecionado)" class="ui-corner-all custom-corners">
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="tblIpvaCotaUnicaVeiculo" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive table-2-cols table-first-col-emphasis">
+                    <thead>
+                    <tr class="ui-bar-b">
+                        <th class="center" colspan="2">IPVA - Conta Única:</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>Vencimento:</th>
+                        <th>{{pagamentoSelecionado.dataVencimentoParcelaUnica}}</th>
+                    </tr>
+                    <tr>
+                        <th>Valor:</th>
+                        <th>{{pagamentoSelecionado.parcelaUnica}} {{(pagamentoSelecionado.situacaoParcelaUnica.toLowerCase() != 'quitado') ? '*' : ''}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br ng-show="exibeTabelaParcelas(pagamentoSelecionado)"/>
+        <div ng-show="exibeTabelaParcelas(pagamentoSelecionado)" class="ui-corner-all custom-corners">
+            <div class="ui-body ui-body-a">
+                <table data-role="table" id="tblIpvaParcelasVeiculo" data-mode="columntoggle" class="ui-body-e ui-shadow table-stripe ui-responsive table-3-cols table-first-col-emphasis">
+                    <thead>
+                    <tr class="ui-bar-b">
+                        <th class="title center" colspan="3">IPVA - Parcelas:</th>
+                    </tr>
+                    <tr class="ui-bar-b">
+                        <th>Parcelas</th>
+                        <th>Vencimento</th>
+                        <th>Valor</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>1</th>
+                        <th>{{pagamentoSelecionado.dataVencimentoP1}}</th>
+                        <th>{{pagamentoSelecionado.parcela1}} {{(pagamentoSelecionado.situacaoParcela1.toLowerCase() != 'quitado') ? '*' : ''}}</th>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <th>{{pagamentoSelecionado.dataVencimentoP2}}</th>
+                        <th>{{pagamentoSelecionado.parcela2}} {{(pagamentoSelecionado.situacaoParcela2.toLowerCase() != 'quitado') ? '*' : ''}}</th>
+                    </tr>
+                    <tr>
+                        <th>3</th>
+                        <th>{{pagamentoSelecionado.dataVencimentoP3}}</th>
+                        <th>{{pagamentoSelecionado.parcela3}} {{(pagamentoSelecionado.situacaoParcela3.toLowerCase() != 'quitado') ? '*' : ''}}</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <h4 ng-show="verificarPagamentoEmAberto(pagamentoSelecionado)" class="center">
+            * Valores originais sem desconto, multa e juros.
+        </h4>
+
+        <h4 ng-show="procurarReparticaoFazendaria(pagamentoSelecionado)" class="center red">
+            Favor Procurar a Repartição fazendária do seu município.
+        </h4>
+    </div>
+
+    <div data-theme="f" data-role="footer" data-tap-toggle="false" data-id="footer" data-position="fixed">
+        <div data-role="navbar">
+            <ul>
+                <li>
+                    <a href="#consultar_veiculo" class="ui-btn-active ui-state-persist">
+                        <i class="fa fa-search"></i>
+                        <div>Consultar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#cadastrar_veiculo">
+                        <i class="fa fa-plus"></i>
+                        <div>Cadastrar Veículo</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#veiculo_cadastrado">
+                        <i class="fa fa-car"></i>
+                        <div>Veículo Cadastrado</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#escala_vencimento">
+                        <i class="fa fa-calendar"></i>
+                        <div>Escala Vencimento</div>
+                    </a>
+                </li>
+            </ul>
+        </div><!-- /navbar -->
+    </div>
+</div><!-- /page -->
+
+
+
+<!-- WEINRE DEBUG -->
+<!-- <script src="http://192.168.1.25:8888/target/target-script-min.js#ipvamobile"></script> -->
+<!-- <script src="http://debug.build.phonegap.com/target/target-script-min.js#ipvamobile"></script> -->
+
+<!-- DATE.JS -->
+<script type="text/javascript" src="lib/date.js/date-pt-BR.js"></script>
+<!-- YDN-DB JS -->
+<script type="text/javascript" src="lib/YDNDB/ydn.db-is-core-e-qry-dev.js"></script>
+<!-- Phonegap/Cordova JS -->
+<script type="text/javascript" src="cordova.js"></script>
+<!-- DATABASE JS -->
+<script type="text/javascript" src="js/database.js"></script>
+<!-- PUSH JS -->
+<script type="text/javascript" src="js/push.js"></script>
+<!-- JQuery JS -->
+<script type="text/javascript" src="lib/jquery/jquery-2.1.1.min.js"></script>
+<script type="text/javascript">
+    /*$(document).on('mobileinit', function(){
+        console.log('mobileinit');
+        //$.mobile.autoInitializePage = false;
+        console.log('$.mobile.linkBindingEnabled: ' + $.mobile.linkBindingEnabled);
+        console.log('$.mobile.ajaxEnabled: ' + $.mobile.ajaxEnabled);
+        $.mobile.linkBindingEnabled = true;
+        $.mobile.ajaxEnabled = true;
+    });*/
+    /*$(document).on('afterinit', function(){
+        console.log('afterinit');
+        window.location.hash = 'home';
+        $.mobile.initializePage();
+    });*/
+</script>
+<!-- JQuery Mobile JS -->
+<script type="text/javascript" src="lib/jquery.mobile/js/jquery.mobile-1.4.4.min.js"></script>
+<!-- Custom app JS -->
+<script type="text/javascript" src="js/app.js"></script>
+
+<script type="text/javascript" src="lib/angularjs/angular.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/services.js"></script>
+
+<script type="text/javascript">
+    app.initialize();
+</script>
+</body>
+</html>

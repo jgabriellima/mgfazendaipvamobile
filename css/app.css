@@ -1,0 +1,599 @@
+.collapsible-vencimentos .ui-collapsible-heading a{
+    text-align: center;
+    padding-right: 22px!important;
+}
+.collapsible-vencimentos .ui-collapsible-heading a:after{
+    margin-right: 5px;
+}
+
+h4.red{
+    color:#CB3030!important;
+}
+
+.hidden{
+    display: none !!important;
+}
+
+.div-table {
+    display: table;
+}
+.div-row {
+    display: table-row;
+}
+.div-cell{
+    display: table-row;
+}
+
+.ui-icon-loading {
+    background-color: transparent !important;
+}
+
+/* SPLASH SCREEN */
+.splash img {
+    width: 100%;
+}
+.splash .title {
+    font-size: 1.5em;
+    color: #CB3030;
+    color: #cc0000;
+    text-shadow: 0 .5em .5em #000; /* horizontal-offset vertical-offset 'blur' colour */
+    -moz-text-shadow: 0 .5em .5em #000;
+    -webkit-text-shadow: 0 .5em .5em #000;
+    text-shadow: .05em /*{c-bar-shadow-x}*/ .05em /*{c-bar-shadow-y}*/ 0 /*{c-bar-shadow-radius}*/ #000000 /*{c-bar-shadow-color}*/;
+    font-weight: bold;
+}
+
+.progress-wrapper {
+    margin-top: 10px;
+    width: 100%;
+    background: #484850;
+    padding: 0px;
+    border: .15em solid rgba(0,0,0,0.75);
+    box-shadow:
+    inset 0 0 .3em rgba(0,0,0,0.3), 0 .2em .2em rgba(256,256,256,0.45), inset 0 .3em .25em rgba(0,0,0,0.5);
+    /*position: relative;*/
+}
+
+.progress {
+    width: 100%;
+    height: .4em;
+    background-color: hsla(0, 95%, 50%, 1);
+    /*position: relative;*/
+    /* This is the top gradient for the color bar */
+    box-shadow: inset 0 .3em 0 rgba(255,255,255,0.2), inset 0 .2em .2em rgba(0,0,0,0.125);
+    margin: 0 0em;
+    border-right: .03em solid rgba(0,0,0,0.75);
+    -webkit-animation: loadingProgress 5s; /* Chrome, Safari, Opera */
+    animation: loadingProgress 5s;
+}
+
+@-webkit-keyframes loadingProgress {
+    /* Chrome, Safari, Opera */
+    0%   {width: 0%;}
+    25%  {width: 25%;}
+    75%  {width: 75%}
+    100% {width: 100%}
+}
+
+@keyframes loadingProgress {
+    /* Standard syntax */
+    0%   {width: 0%;}
+    25%  {width: 25%;}
+    75%  {width: 75%}
+    100% {width: 100%}
+}
+
+/*  */
+.middle {
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    -webkit-transform:translate(-50%,-50%);
+}
+.middle-full-width {
+    position:fixed;
+    top:50%;
+    left:0%;
+    margin:0em 1em;
+    transform:translate(0%,-50%);
+    -webkit-transform:translate(0%,-50%);
+}
+/* REMOVER OS BULLETS DAS LISTAS DESORDENADAS NO WP8 */
+ul {
+    list-style-type: none !important;
+}
+
+/* CLASSE GENÉRICA PARA CENTRALIZAÇÃO DE TEXTO */
+.center {
+    text-align: center !important;
+}
+
+.cadastrar-veiculo-content .button-wrap, .veiculo-cadastrado-content .button-wrap, .collapsible-vencimentos .button-wrap {
+    padding: .1em !important;
+}
+.cadastrar-veiculo-content .button-wrap .ui-btn, .veiculo-cadastrado-content .button-wrap .ui-btn, .collapsible-vencimentos .button-wrap .ui-btn {
+    margin: .1em !important;
+}
+.veiculo-cadastrado-content .ui-collapsible-content {
+    padding: .2em !important;
+}
+
+/* DEFINIÇÕES DA TABELA RELATIVA À ESCALA DE VENCIMENTO E DADOS DO VEICULO */
+.escala-vencimento-content .page-subtitle{
+    text-align: center;
+}
+.escala-vencimento-content .ui-table-columntoggle-btn, .dados-veiculo-content .ui-table-columntoggle-btn, .app-header .ui-table-columntoggle-btn {
+    display: none !important;
+}
+.escala-vencimento-content .ui-body, .dados-veiculo-content .ui-body {
+    padding: 0em !important;
+}
+.escala-vencimento-content table, .dados-veiculo-content table {
+    width: 100% !important;
+}
+.escala-vencimento-content table thead th, .escala-vencimento-content table tbody th, .dados-veiculo-content table thead th {
+    text-align: center;
+}
+
+.app-header {
+    display: table;
+}
+.app-header .app-header-row {
+    display: table-row;
+    width: 100%;
+}
+.app-header .app-header-row .app-header-cell-left, .app-header .app-header-row .app-header-cell-middle, .app-header .app-header-row .app-header-cell-right {
+    display: table-cell;
+    width: 33%;
+    padding: 0px 4px;
+}
+.app-header .app-header-row .app-header-cell-left{
+    text-align: left;
+}
+.app-header .app-header-row .app-header-cell-middle{
+    text-align: center;
+}
+.app-header .app-header-row .app-header-cell-right{
+    text-align: right;
+}
+.app-header h3 {
+    margin: 0px 0px !important;
+}
+
+.menu {
+    padding: 0px !important;
+}
+.menu a {
+    margin: 0px !important;
+}
+
+.menu .menu-title{
+    font-weight: bold;
+    font-size: 1.4em;
+    text-shadow: -.1em .1em .1em #000; /* horizontal-offset vertical-offset 'blur' colour */
+    -moz-text-shadow: -.1em .1em .1em #000;
+    -webkit-text-shadow: -.1em .1em .1em #000;
+}
+
+.title-exercicio {
+    color: #CB3030 !important;
+    font-size: 1.2em !important;
+    font-weight: bold !important;
+}
+
+.table-2-cols {
+    width: 100%;
+}
+.table-2-cols tbody tr th:first-child {
+    text-align: right;
+}
+.table-2-cols tbody tr th:last-child {
+    text-align: left;
+}
+.table-2-cols tbody tr th{
+    vertical-align: middle;
+    width: 50%;
+    font-size: .8em;
+    font-weight: normal;
+    color: #333333;
+    padding-left: 1em !important;
+}
+
+.table-3-cols {
+    width: 100%;
+}
+.table-3-cols thead tr th {
+    width: 33%;
+    text-align: center;
+}
+.table-3-cols tbody tr th{
+    width: 33%;
+    text-align: center;
+    vertical-align: middle;
+    font-size: .8em;
+    font-weight: normal;
+    color: #333333;
+    padding-left: 1em !important;
+}
+
+.table-first-col-emphasis tbody tr th:first-child{
+    font-size: 1em !important;
+    padding-left: 1em !important;
+    font-weight: bold !important;
+    color: #000000 !important;
+}
+
+
+/* BOTÕES COM IMAGEM E TEXTO LADO A LADO - ESPAÇO ENTRE IMAGEM E TEXTO*/
+.button-wrap a span {
+    margin-left: 1em !important;
+}
+
+/*  QUEBRA AUTOMÁTICA DE LINHA NOS TEXTOS DOS BOTÕES DO FOOTER*/
+.ui-footer .ui-navbar ul li a.ui-btn {
+    white-space: normal !important;
+}
+
+/* EFEITO DE SOMBREADO NO ÍCONE DA APLICAÇÃO NO HEADER */
+.fa-ipva {
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    font-size: 1.4em !important;
+    padding: 0em .5em !important;
+    color: #D71920;
+    text-shadow: -.1em .1em .1em #000; /* horizontal-offset vertical-offset 'blur' colour */
+    -moz-text-shadow: -.1em .1em .1em #000;
+    -webkit-text-shadow: -.1em .1em .1em #000;
+}
+
+.icone-receber-notificacao {
+    font-size: 1.4em !important;
+}
+.link-receber-notificacao, .link-receber-notificacao:visited{
+    text-decoration: none !important;
+    color: #000000 !important;
+}
+
+.popup-notificacao-titulo {
+    font-size: 1.4em;
+    text-align: center;
+    padding: .5em;
+}
+
+.popup {
+    max-width: 400px;
+}
+.popup .button-wrap {
+    padding: .1em !important;
+}
+.popup .ui-header span {
+    margin-left: .5em !important;
+}
+
+/* DEFINIÇÕES PARA DIFERENTES TAMANHOS DE TELA */
+/* Custom, smallest device */
+@media only screen and (min-width : 240px) {
+    .button-wrap a{
+        font-size: .6em !important;
+    }
+
+    .popup .ui-header {
+        font-size: .95em !important;
+    }
+    .popup .ui-content {
+        font-size: .75em !important;
+    }
+/* ESCALA VENCIMENTO*/
+    .escala-vencimento-content .page-subtitle{
+        font-size: .75em;
+        /*color: fuchsia;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: .75em !important;
+        font-weight: bold !important;
+        /*color: fuchsia;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: .5em !important;
+        /*color: fuchsia;*/
+    }
+
+/* FOOTER NAVBAR */
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: .75em !important;
+        /*color: fuchsia !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: .5em !important;
+        /*color: fuchsia !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: .75em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
+
+/* Custom, iPhone Retina */
+@media only screen and (min-width : 320px) {
+    .button-wrap a{
+        font-size: .75em !important;
+    }
+    .ui-collapsible-heading{
+        font-size: .85em !important;
+    }
+    .popup .ui-header {
+        font-size: 1.4em !important;
+    }
+    .popup .ui-content {
+        font-size: 1em !important;
+    }
+/* ESCALA VENCIMENTO*/
+    .escala-vencimento-content .page-subtitle{
+        font-size: .9em;
+        /*color: green;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: .9em !important;
+        font-weight: bold !important;
+        /*color: green;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: .75em !important;
+        /*color: green;*/
+    }
+/* FOOTER NAVBAR*/
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: .9em !important;
+        /*color: green !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: .75em !important;
+        /*color: green !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: .9em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .button-wrap a{
+        font-size: .8em !important;
+    }
+    .ui-collapsible-heading{
+        font-size: 1.5em !important;
+    }
+    .popup .ui-header {
+        font-size: 1.4em !important;
+    }
+    .popup .ui-content {
+        font-size: 1em !important;
+    }
+/* ESCALA VENCIMENTO*/
+    .escala-vencimento-content .page-subtitle{
+        font-size: 1em;
+        /*color: orange;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: 1em !important;
+        font-weight: bold !important;
+        /*color: orange;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: .8em !important;
+        /*color: orange;*/
+    }
+/* FOOTER NAVBAR*/
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: 1em !important;
+        /*color: orange !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: .8em !important;
+        /*color: orange !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .button-wrap a{
+        font-size: .8em !important;
+    }
+    .ui-collapsible-heading{
+        font-size: 1.5em !important;
+    }
+    .popup .ui-header {
+        font-size: 1.4em !important;
+    }
+    .popup .ui-content {
+        font-size: 1em !important;
+    }
+/* ESCALA VENCIMENTO */
+    .escala-vencimento-content .page-subtitle{
+        font-size: 1.2em;
+        /*color: blue;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: 1.2em !important;
+        font-weight: bold !important;
+        /*color: blue;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: 1em !important;
+        /*color: blue;*/
+    }
+/* FOOTER NAVBAR*/
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: 1.2em !important;
+        /*color: blue !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: 1em !important;
+        /*color: blue !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: 1.2em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .button-wrap a{
+        font-size: .8em !important;
+    }
+    .ui-collapsible-heading{
+        font-size: 1.5em !important;
+    }
+    .popup .ui-header {
+        font-size: 1.4em !important;
+    }
+    .popup .ui-content {
+        font-size: 1em !important;
+    }
+/* ESCALA VENCIMENTO */
+    .escala-vencimento-content .page-subtitle{
+        font-size: 1.4em;
+        /*color: yellow;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: 1.4em !important;
+        font-weight: bold !important;
+        /*color: yellow;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: 1.2em !important;
+        /*color: yellow;*/
+    }
+/* FOOTER NAVBAR*/
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: 1.4em !important;
+        /*color: yellow !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: 1.2em !important;
+        /*color: yellow !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: 1.4em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .button-wrap a{
+        font-size: .8em !important;
+    }
+    .ui-collapsible-heading{
+        font-size: 1.5em !important;
+    }
+    .popup .ui-header {
+        font-size: 1.4em !important;
+    }
+    .popup .ui-content {
+        font-size: 1em !important;
+    }
+/* ESCALA VENCIMENTO */
+    .escala-vencimento-content .page-subtitle{
+        font-size: 1.6em;
+        /*color: red;*/
+    }
+    .escala-vencimento-content thead tr th {
+        font-size: 1.6em !important;
+        font-weight: bold !important;
+        /*color: red;*/
+    }
+    .escala-vencimento-content tbody tr th {
+        font-size: 1.4em !important;
+        /*color: red;*/
+    }
+/* FOOTER NAVBAR*/
+    .ui-footer .ui-navbar ul li a.ui-btn i {
+        font-size: 1.6em !important;
+        /*color: red !important;*/
+    }
+    .ui-footer .ui-navbar ul li a.ui-btn div {
+        font-size: 1.4em !important;
+        /*color: red !important;*/
+    }
+/* HEADER */
+    .app-title{
+        font-size: 1.6em;
+        color: #ffffff;
+        text-shadow: 0 2px 2px #000; /* horizontal-offset vertical-offset 'blur' colour */
+        -moz-text-shadow: 0 2px 2px #000;
+        -webkit-text-shadow: 0 2px 2px #000;
+    }
+    .app-header {
+        /*overflow:hidden;*/
+        background: -webkit-linear-gradient(#454444, #797474); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(#454444, #797474); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(#454444, #797474); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#454444, #797474); /* Standard syntax */
+    }
+}
